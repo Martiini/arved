@@ -3,8 +3,6 @@
     <h1 id="inv_title"><?= $invoice->name ?></h1>
 
 
-    <?= $this->render('partials/menu'); ?>
-
     <br />
     <br />
     <br />

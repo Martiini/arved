@@ -7,10 +7,6 @@ use yii\widgets\LinkPager;
     <h1>Client list</h1>
 
     <br />
-
-    <?= $this->render('partials/menu'); ?>
-
-    <br />
     <br />
 
     <?php if(count($clients)): ?>

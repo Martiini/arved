@@ -38,7 +38,24 @@ AppAsset::register($this);
                     ['label' => 'Home', 'url' => ['/site/index']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/user/login']] :
-                        ['label' => 'Invoices', 'url' => ['/invoice']],
+                    [
+                        'label' => 'Invoices',
+                        'items' => [
+                            ['label' => 'List', 'url' => '/invoice'],
+                            '<li class="divider"></li>',
+                            '<li class="dropdown-header">Actions</li>',
+                            ['label' => 'Add invoice', 'url' => '/invoice/create'],
+                        ],
+                    ],
+                    [
+                        'label' => 'Clients',
+                        'items' => [
+                            ['label' => 'List', 'url' => '/client'],
+                            '<li class="divider"></li>',
+                            '<li class="dropdown-header">Actions</li>',
+                            ['label' => 'Add client', 'url' => '/client/create'],
+                        ],
+                    ],
                         ['label' => 'Profile', 'url' => ['/user/profile']],
                         ['label' => 'Account settings', 'url' => ['/user/account']],
                         ['label' => 'Logout (' . Yii::$app->user->displayName . ')',

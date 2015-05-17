@@ -12,10 +12,6 @@ use yii\widgets\ActiveForm;
     <h1>Create invoice</h1>
 
     <br />
-
-    <?= $this->render('partials/menu'); ?>
-
-    <br />
     <br />
     <?php $form = ActiveForm::begin(); ?>
 
