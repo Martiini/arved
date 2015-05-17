@@ -16,7 +16,7 @@ class m150517_091128_invoice extends Migration
 
         $this->createTable('{{%client}}', [
             'id' => Schema::TYPE_PK,
-            'first_name' => Schema::TYPE_INTEGER . ' null default null',
+            'first_name' => Schema::TYPE_STRING . ' null default null',
             'last_name' => Schema::TYPE_STRING . ' null default null',
             'address' => Schema::TYPE_STRING . ' null default null',
             'email' => Schema::TYPE_STRING . ' null default null',
