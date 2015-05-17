@@ -36,9 +36,7 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['/user/login']] :
-                    [
+                    Yii::$app->user->isGuest ?'': [
                         'label' => 'Invoices',
                         'items' => [
                             ['label' => 'List', 'url' => '/invoice'],
@@ -47,7 +45,7 @@ AppAsset::register($this);
                             ['label' => 'Add invoice', 'url' => '/invoice/create'],
                         ],
                     ],
-                    [
+                    Yii::$app->user->isGuest ?'': [
                         'label' => 'Clients',
                         'items' => [
                             ['label' => 'List', 'url' => '/client'],
@@ -56,8 +54,11 @@ AppAsset::register($this);
                             ['label' => 'Add client', 'url' => '/client/create'],
                         ],
                     ],
-                        ['label' => 'Profile', 'url' => ['/user/profile']],
-                        ['label' => 'Account settings', 'url' => ['/user/account']],
+                    Yii::$app->user->isGuest ?'': ['label' => 'Profile', 'url' => ['/user/profile']],
+                    Yii::$app->user->isGuest ?'': ['label' => 'Account settings', 'url' => ['/user/account']],
+
+                    Yii::$app->user->isGuest ?
+                        ['label' => 'Login', 'url' => ['/user/login']] :
                         ['label' => 'Logout (' . Yii::$app->user->displayName . ')',
                             'url' => ['/user/logout'],
                             'linkOptions' => ['data-method' => 'post']],
