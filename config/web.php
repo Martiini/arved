@@ -8,6 +8,7 @@ $config = [
     'bootstrap' => [
         'log',
         function () { return Yii::$app->getModule("user"); },
+        'gii',
     ],
     'components' => [
         'urlManager' => [
@@ -55,6 +56,7 @@ $config = [
             'class' => 'amnah\yii2\user\Module',
             // set custom module properties here ...
         ],
+        'gii' => 'yii\gii\Module',
     ],
     'params' => $params,
 ];

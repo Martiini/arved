@@ -36,10 +36,9 @@ AppAsset::register($this);
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Login', 'url' => ['/user/login']] :
+                        ['label' => 'Invoices', 'url' => ['/invoice']],
                         ['label' => 'Profile', 'url' => ['/user/profile']],
                         ['label' => 'Account settings', 'url' => ['/user/account']],
                         ['label' => 'Logout (' . Yii::$app->user->displayName . ')',
@@ -52,6 +51,7 @@ AppAsset::register($this);
 
         <div class="container">
             <?= Breadcrumbs::widget([
+                // aww yiss, breadcrumbs :]
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]) ?>
             <?= $content ?>
