@@ -43,7 +43,7 @@ class Invoice extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'client_id' => 'Client ID',
+            'client_id' => 'Client',
             'name' => 'Name',
         ];
     }

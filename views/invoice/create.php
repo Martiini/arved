@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <br />
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'client_id') ?>
+        <?= $form->field($model, 'client_id')->dropDownList($clients) ?>
         <?= $form->field($model, 'name') ?>
     
         <div class="form-group">

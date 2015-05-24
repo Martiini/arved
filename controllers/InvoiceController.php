@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Client;
 use app\models\Invoice;
 use Yii;
 use yii\web\Controller;
@@ -27,6 +28,13 @@ class InvoiceController extends Controller
     public function actionCreate()
     {
         $model = new Invoice();
+        $rawClients = Client::find()->all();
+
+        $clients = [];
+
+        foreach ($rawClients as $client) {
+            $clients[$client->id] = $client->first_name . ' ' .$client->last_name;
+        }
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -38,6 +46,7 @@ class InvoiceController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'clients' => $clients,
         ]);
     }
 
