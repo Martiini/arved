@@ -5,6 +5,12 @@ use yii\widgets\LinkPager;
 $url = new \yii\helpers\Url();
 
 ?>
+<style type="text/css">
+    .highlight-row:hover {
+        background: #e0e0e0;
+        cursor: pointer;
+    }
+</style>
 <div class="container well">
     <h1>Client list</h1>
 
@@ -12,7 +18,7 @@ $url = new \yii\helpers\Url();
     <br />
 
     <?php if($clients): ?>
-        <table class="table table-responsive table-striped">
+        <table class="table table-responsive">
             <tr>
                 <th>First name</th>
                 <th>Last name</th>
@@ -23,7 +29,7 @@ $url = new \yii\helpers\Url();
             </tr>
 
             <?php foreach($clients as $client): ?>
-            <tr>
+            <tr class="highlight-row" onclick="javascript:window.location.href='<?= $url->to('invoice/index?client_id=' . $client->id) ?>'">
                 <td><?= $client->first_name ?></td>
                 <td><?= $client->last_name ?></td>
                 <td><?= $client->email ?></td>

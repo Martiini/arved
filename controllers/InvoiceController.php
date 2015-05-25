@@ -24,11 +24,17 @@ class InvoiceController extends Controller
     public function actionIndex()
     {
 
-        $post = Yii::$app->request->get();
-        $name = isset($post['search']) ? explode(' ', $post['search']) : false;
+        $id = Yii::$app->request->get('client_id');
 
-        $client = $name ? Client::find()->where(['or like', 'first_name', $name])->orWhere(['or like', 'last_name', $name])->one() : false;
-        $query = $client ? Invoice::find()->where(['client_id' => $client->id]) : Invoice::find();
+        if ($id) {
+            $query = Invoice::find()->where(['client_id' => $id]);
+        } else {
+            $post = Yii::$app->request->get();
+            $name = isset($post['search']) ? explode(' ', $post['search']) : false;
+
+            $client = $name ? Client::find()->where(['or like', 'first_name', $name])->orWhere(['or like', 'last_name', $name])->one() : false;
+            $query = $client ? Invoice::find()->where(['client_id' => $client->id]) : Invoice::find();
+        }
 
         $pagination = new Pagination([
             'defaultPageSize' => 15,
