@@ -81,5 +81,11 @@ class InvoiceController extends Controller
         );
     }
 
+    public function actionRemove() {
+        $id = Yii::$app->request->get('id');
+        Invoice::find()->where(['id' => $id])->one()->delete();
+        $this->redirect('index');
+    }
+
 
 }

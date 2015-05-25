@@ -21,7 +21,7 @@ $url = new \yii\helpers\Url();
                     <td><?= $invoice->id ?></td>
                     <td><?= $invoice->name ?></td>
                     <td><?= $invoice->getClient()->one()->first_name ?> <?= $invoice->getClient()->one()->last_name ?></td>
-                    <td><a href="<?= $url->to('invoice/edit?id=' . $invoice->id) ?>">Edit</a> | <a href="#">Delete</a></td>
+                    <td><a href="<?= $url->to('invoice/edit?id=' . $invoice->id) ?>">Edit</a> | <a href="<?= $url->to('invoice/remove?id=' . $invoice->id) ?>">Delete</a></td>
                 </tr>
             <? endforeach; ?>
         </table>
