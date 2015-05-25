@@ -1,7 +1,7 @@
 <div>
 
     <h1 id="inv_title">Invoice: <?= $invoice->name ?>  <a class="btn btn-success" onclick="updatePreview(true)">Download as PDF</a></h1>
-
+    <p><i>..by <?= $invoice->getUser()->one()->username ?></i></p>
 
     <br/>
     <br/>
