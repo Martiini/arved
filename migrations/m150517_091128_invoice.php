@@ -26,6 +26,7 @@ class m150517_091128_invoice extends Migration
         $this->createTable('{{%invoice}}', [
             'id' => Schema::TYPE_PK,
             'client_id' => Schema::TYPE_INTEGER . ' not null',
+            'user_id' => Schema::TYPE_INTEGER . ' not null',
             'name' => Schema::TYPE_STRING . ' not null',
         ], $tableOptions);
         $this->createTable('{{%invoice_item}}', [
@@ -36,6 +37,7 @@ class m150517_091128_invoice extends Migration
         ], $tableOptions);
 
         $this->addForeignKey('{{%invoice_client_id}}', '{{%invoice}}', 'client_id', '{{%client}}', 'id');
+        $this->addForeignKey('{{%invoice_user_id}}', '{{%invoice}}', 'user_id', '{{%user}}', 'id');
         $this->addForeignKey('{{%invoice_item_id}}', '{{%invoice_item}}', 'invoice_id', '{{%invoice}}', 'id');
 
     }

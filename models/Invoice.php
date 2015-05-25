@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $client_id
+ * @property integer $user_id
  * @property string $name
  *
  * @property Client $client
@@ -30,7 +31,7 @@ class Invoice extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['client_id', 'name'], 'required'],
+            [['client_id', 'user_id', 'name'], 'required'],
             [['client_id'], 'integer'],
             [['name'], 'string', 'max' => 255]
         ];
@@ -54,6 +55,14 @@ class Invoice extends \yii\db\ActiveRecord
     public function getClient()
     {
         return $this->hasOne(Client::className(), ['id' => 'client_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 
     /**
