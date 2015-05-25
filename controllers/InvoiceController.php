@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Client;
 use app\models\Invoice;
 use Yii;
+use yii\data\Pagination;
 use yii\web\Controller;
 
 class InvoiceController extends Controller
@@ -22,7 +23,22 @@ class InvoiceController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $query = Invoice::find();
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 15,
+            'totalCount' => $query->count(),
+        ]);
+
+        $clients = $query->orderBy('id')
+            ->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->all();
+
+        return $this->render('index', [
+            'invoices' => $clients,
+            'pagination' => $pagination,
+        ]);
     }
 
     public function actionCreate()
