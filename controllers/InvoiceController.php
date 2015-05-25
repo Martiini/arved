@@ -61,7 +61,7 @@ class InvoiceController extends Controller
         $data['invoice'] = $invoice->toArray();
         $data['client'] = Client::find()->where(['id' => $invoice->client_id])->one()->toArray();
         $data['rows'] = $items->asArray()->all();
-        $data['sum'] = $items->sum('sum');
+        $data['sum'] = (int) $items->sum('sum');
         die(json_encode($data));
     }
 
@@ -107,7 +107,11 @@ class InvoiceController extends Controller
             $clients[$client->id] = $client->first_name . ' ' .$client->last_name;
         }
 
-        if ($model->load(Yii::$app->request->post())) {
+
+        $post = Yii::$app->request->post();
+        $post['Invoice']['user_id'] = \Yii::$app->user->identity->id;
+
+        if ($model->load($post)) {
             if ($model->validate()) {
                 // form inputs are valid, do something here
                 $model->save();

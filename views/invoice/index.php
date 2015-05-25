@@ -25,13 +25,15 @@ $url = new \yii\helpers\Url();
                 <td>#</td>
                 <td>Name</td>
                 <td>Client</td>
+                <td>Owner</td>
                 <td></td>
             </tr>
             <? foreach ($invoices as $invoice): ?>
                 <tr>
                     <td><?= $invoice->id ?></td>
-                    <td><?= $invoice->name ?></td>
+                    <td><a href="<?= $url->to('/invoice/edit?id=' . $invoice->id) ?>"><?= $invoice->name ?></a></td>
                     <td><?= $invoice->getClient()->one()->first_name ?> <?= $invoice->getClient()->one()->last_name ?></td>
+                    <td><?= $invoice->getUser()->one()->username ?></td>
                     <td><a href="<?= $url->to('/invoice/edit?id=' . $invoice->id) ?>">Edit</a> | <a href="<?= $url->to('/invoice/remove?id=' . $invoice->id) ?>">Delete</a></td>
                 </tr>
             <? endforeach; ?>

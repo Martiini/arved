@@ -8,6 +8,8 @@ function updatePreview(download) {
 
         data = JSON.parse(data);
 
+        $('#total_sum').text(data.sum + ' €');
+
         doc.setFontSize(20);
         doc.text(25, 25, data.invoice.name);
 

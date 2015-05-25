@@ -1,6 +1,6 @@
 <div>
 
-    <h1 id="inv_title">Invoice: <?= $invoice->name ?>  <a class="btn btn-primary" onclick="updatePreview(true)">Download as PDF</a></h1>
+    <h1 id="inv_title">Invoice: <?= $invoice->name ?>  <a class="btn btn-success" onclick="updatePreview(true)">Download as PDF</a></h1>
 
 
     <br/>
@@ -32,7 +32,7 @@
 
         <tr>
             <th>Total:</th>
-            <th><?= $sum ?> €</th>
+            <th id="total_sum"><?= $sum ?> €</th>
             <th></th>
         </tr>
 

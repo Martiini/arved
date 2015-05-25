@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use amnah\yii2\user\models\User as Yii2User;
 
 /**
  * This is the model class for table "invoice".
@@ -62,7 +63,7 @@ class Invoice extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(Yii2User::className(), ['id' => 'user_id']);
     }
 
     /**
