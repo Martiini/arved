@@ -56,10 +56,12 @@ class InvoiceController extends Controller
         $id = $id = Yii::$app->request->get('invoice_id');
 
         $invoice = Invoice::find()->where(['id' => $id])->one();
+        $items = InvoiceItem::find()->where(['invoice_id' => $invoice->id]);
 
         $data['invoice'] = $invoice->toArray();
         $data['client'] = Client::find()->where(['id' => $invoice->client_id])->one()->toArray();
-        $data['rows'] = InvoiceItem::find()->where(['invoice_id' => $invoice->id])->asArray()->all();
+        $data['rows'] = $items->asArray()->all();
+        $data['sum'] = $items->sum('sum');
         die(json_encode($data));
     }
 

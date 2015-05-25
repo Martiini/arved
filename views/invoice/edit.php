@@ -1,6 +1,6 @@
 <div>
 
-    <h1 id="inv_title">Invoice: <?= $invoice->name ?></h1>
+    <h1 id="inv_title">Invoice: <?= $invoice->name ?>  <a class="btn btn-primary" onclick="updatePreview(true)">Download as PDF</a></h1>
 
 
     <br/>
@@ -15,7 +15,7 @@
     </table>
 
 
-    <table class="table" id="item_table">
+    <table class="table" id="item_table" data-id="<?= $invoice->id ?>">
         <tr id="items_header">
             <th>Item</th>
             <th>Cost</th>
@@ -47,16 +47,7 @@
 
     </table>
 
-
-    <br/>
-    <br/>
-    <br/>
-
-    <a class="btn btn-primary" onclick="updatePreview('<?= $invoice->id ?>', true)">Download</a>
-    <a class="btn btn-default" onclick="updatePreview('<?= $invoice->id ?>')">
-        Preview
-    </a>
-
+    <h2>Preview</h2>
     <br/>
     <br/>
     <iframe id="pdf_preview" src="" style="width:100%; height:500px;" frameborder="0"></iframe>
