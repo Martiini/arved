@@ -1,22 +1,62 @@
-function updatePreview(download) {
+function updatePreview(id, download) {
     var doc = new jsPDF();
 
-    doc.setFontSize(20);
-    doc.text(35, 25, $('#inv_title').text());
+    $.get( "json?invoice_id=" + id, function( data ) {
 
-    doc.setFontSize(12);
-    doc.text(35, 34, 'Client: ' + $('#inv_client').text());
+        data = JSON.parse(data);
 
-    if (download) {
-        doc.save('invoice.pdf');
-    } else {
+        doc.setFontSize(20);
+        doc.text(25, 25, data.invoice.name);
 
-        var urlString = doc.output('dataurlstring');
+        doc.setFontSize(12);
+        doc.text(25, 34, 'Client name: ' + data.client.first_name + ' ' + data.client.last_name);
+        doc.text(25, 40, 'Address: ' + data.client.address);
+        doc.text(25, 46, 'Email: ' + data.client.email);
+        doc.text(25, 52, 'Phone: ' + data.client.phone);
+        doc.text(25, 58, 'Company: ' + data.client.company);
 
-        $('#pdf_preview').attr({
-            src: urlString
-        });
+        if (download) {
+            doc.save('invoice.pdf');
+        } else {
 
-    }
+            var urlString = doc.output('dataurlstring');
+
+            $('#pdf_preview').attr({
+                src: urlString
+            });
+
+        }
+    });
 
 }
+
+function addItem() {
+    var invoice_id = $('#add_item_form').attr('data-id');
+
+    $.post( "api", { 'action': "add", 'invoice_id': invoice_id, 'name': $('#item_name').val(), 'sum': $('#item_sum').val() } ).done(function( data ) {
+        if(data != 'failed') {
+            var newRow = $('#item_form tbody').html().replace('{{name}}', $('#item_name').val()).replace('{{sum}}', $('#item_sum').val()).replace('{{id}}', data).replace('{{id}}', data);
+            $('#item_table tr:nth-last-child(3)').after(newRow);
+            $('#item_name').val('');
+            $('#item_sum').val('');
+        } else {
+            alert('Something went wrong');
+        }
+    });
+}
+
+function removeItem(item_id) {
+    $.post( "api", { 'action': "remove", 'item_id': item_id} ).done(function( data ) {
+        if(data == 'success') {
+            $('#item_' + item_id).remove();
+        } else {
+            alert('Something went wrong');
+        }
+    });
+}
+
+$("#add_item_form").keypress(function(e) {
+    if(e.which == 13) {
+        addItem();
+    }
+});

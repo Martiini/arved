@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Client;
 use app\models\Invoice;
+use app\models\InvoiceItem;
 use Yii;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -19,6 +20,47 @@ class InvoiceController extends Controller
                 'class' => 'yii\web\ErrorAction',
             ],
         ];
+    }
+
+    public function actionApi() {
+        $action = Yii::$app->request->post('action');
+
+        switch($action) {
+            case 'add':
+
+                $model = new InvoiceItem();
+                $model->invoice_id = Yii::$app->request->post('invoice_id');
+                $model->name = Yii::$app->request->post('name');
+                $model->sum = Yii::$app->request->post('sum');
+                if($model->save()) {
+                    die(var_export($model->id));
+                }
+
+                break;
+
+            case 'remove':
+
+                $item = InvoiceItem::find()->where(['id' => Yii::$app->request->post('item_id')])->one();
+
+                if ($item) {
+                    $item->delete();
+                    die('success');
+                }
+
+                break;
+        }
+        die('failed');
+    }
+
+    public function actionJson() {
+        $id = $id = Yii::$app->request->get('invoice_id');
+
+        $invoice = Invoice::find()->where(['id' => $id])->one();
+
+        $data['invoice'] = $invoice->toArray();
+        $data['client'] = Client::find()->where(['id' => $invoice->client_id])->one()->toArray();
+        $data['rows'] = InvoiceItem::find()->where(['invoice_id' => $invoice->id])->all();
+        die(json_encode($data));
     }
 
     public function actionIndex()
@@ -87,6 +129,8 @@ class InvoiceController extends Controller
         return $this->render('edit',
             [
                 'invoice' => $invoice,
+                'invoice_items' => InvoiceItem::find()->where(['invoice_id' => $invoice->id])->all(),
+                'sum' => (int) InvoiceItem::find()->where(['invoice_id' => $invoice->id])->sum('sum'),
                 'client' => $invoice->getClient()->one(),
             ]
         );

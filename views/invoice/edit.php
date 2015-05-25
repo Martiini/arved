@@ -1,24 +1,59 @@
 <div>
 
-    <h1 id="inv_title"><?= $invoice->name ?></h1>
+    <h1 id="inv_title">Invoice: <?= $invoice->name ?></h1>
 
 
-    <br />
-    <br />
-    <br />
+    <br/>
+    <br/>
 
-    <div>
-    <p>Clients name: <span id="inv_client"><?= $client->first_name ?> <?= $client->last_name ?></span></p>
-    </div>
+    <table id="item_form" style="display: none">
+        <tr id="item_{{id}}">
+            <td>{{name}}</td>
+            <td>{{sum}} €</td>
+            <td><a style="cursor: pointer" onclick="removeItem('{{id}}')">Delete</a></td>
+        </tr>
+    </table>
 
 
+    <table class="table" id="item_table">
+        <tr id="items_header">
+            <th>Item</th>
+            <th>Cost</th>
+            <th></th>
+        </tr>
 
-    <br />
-    <br />
-    <br />
+        <? foreach ($invoice_items as $item): ?>
+            <tr id="item_<?= $item->id ?>">
+                <td><?= $item->name ?></td>
+                <td><?= $item->sum ?> €</td>
+                <td><a style="cursor: pointer" onclick="removeItem('<?= $item->id ?>')">Delete</a></td>
+            </tr>
+        <? endforeach; ?>
 
-    <a class="btn btn-primary" onclick="updatePreview(true)">Download</a>
-    <a class="btn btn-default" onclick="updatePreview()">
+        <tr>
+            <th>Total:</th>
+            <th><?= $sum ?> €</th>
+            <th></th>
+        </tr>
+
+        <tr>
+            <th id="add_item_form" data-id="<?= $invoice->id ?>">
+                <input style="width: 30%" class="form-control pull-left" type="text" id="item_name" placeholder="Item name"/>
+                <input style="width: 15%" class="form-control pull-left" type="number" id="item_sum" placeholder="Item cost"/>
+                <button class="btn btn-primary" onclick="addItem()">Add item</button>
+            </th>
+            <th></th>
+        </tr>
+
+    </table>
+
+
+    <br/>
+    <br/>
+    <br/>
+
+    <a class="btn btn-primary" onclick="updatePreview('<?= $invoice->id ?>', true)">Download</a>
+    <a class="btn btn-default" onclick="updatePreview('<?= $invoice->id ?>')">
         Preview
     </a>
 
