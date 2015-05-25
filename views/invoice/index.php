@@ -9,6 +9,17 @@ $url = new \yii\helpers\Url();
     <h1>Invoices</h1>
     <br/>
     <? if ($invoices): ?>
+
+        <div class="pull-right" style="width: 250px">
+            <form method="get">
+                <input style="width: 180px;" class="form-control pull-left" name="search" placeholder="Client look-up" />
+                <button type="submit" class="btn btn-default">Find</button>
+            </form>
+        </div>
+
+        <br />
+        <br />
+
         <table class="table table-responsive table-striped">
             <tr>
                 <td>#</td>
