@@ -32,7 +32,7 @@ $url = new \yii\helpers\Url();
                     <td><?= $invoice->id ?></td>
                     <td><?= $invoice->name ?></td>
                     <td><?= $invoice->getClient()->one()->first_name ?> <?= $invoice->getClient()->one()->last_name ?></td>
-                    <td><a href="<?= $url->to('invoice/edit?id=' . $invoice->id) ?>">Edit</a> | <a href="<?= $url->to('invoice/remove?id=' . $invoice->id) ?>">Delete</a></td>
+                    <td><a href="<?= $url->to('/invoice/edit?id=' . $invoice->id) ?>">Edit</a> | <a href="<?= $url->to('/invoice/remove?id=' . $invoice->id) ?>">Delete</a></td>
                 </tr>
             <? endforeach; ?>
         </table>
@@ -42,6 +42,6 @@ $url = new \yii\helpers\Url();
         <?= LinkPager::widget(['pagination' => $pagination]) ?>
     <? else: ?>
         <div class="alert alert-info">No invoices <br /> <br />
-            <a class="btn btn-primary" href="<?= $url->to('invoice/create') ?>">Create invoice</a> </div>
+            <a class="btn btn-primary" href="<?= $url->to('/invoice/create') ?>">Create invoice</a> </div>
     <? endif ?>
 </div>

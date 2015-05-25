@@ -29,7 +29,7 @@ $url = new \yii\helpers\Url();
             </tr>
 
             <?php foreach($clients as $client): ?>
-            <tr class="highlight-row" onclick="javascript:window.location.href='<?= $url->to('invoice/index?client_id=' . $client->id) ?>'">
+            <tr class="highlight-row" onclick="window.location.href='<?= $url->to('/invoice/index?client_id=' . $client->id) ?>'">
                 <td><?= $client->first_name ?></td>
                 <td><?= $client->last_name ?></td>
                 <td><?= $client->email ?></td>
@@ -43,7 +43,7 @@ $url = new \yii\helpers\Url();
         <?= LinkPager::widget(['pagination' => $pagination]) ?>
     <?php else: ?>
     <div class="alert alert-info">No clients found <br /> <br />
-        <a href="<?= $url->to('client/create') ?>" class="btn btn-primary">Create client</a>
+        <a href="<?= $url->to('/client/create') ?>" class="btn btn-primary">Create client</a>
     </div>
     <?php endif; ?>
 </div>
