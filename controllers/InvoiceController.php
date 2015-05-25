@@ -59,7 +59,7 @@ class InvoiceController extends Controller
 
         $data['invoice'] = $invoice->toArray();
         $data['client'] = Client::find()->where(['id' => $invoice->client_id])->one()->toArray();
-        $data['rows'] = InvoiceItem::find()->where(['invoice_id' => $invoice->id])->all();
+        $data['rows'] = InvoiceItem::find()->where(['invoice_id' => $invoice->id])->asArray()->all();
         die(json_encode($data));
     }
 
