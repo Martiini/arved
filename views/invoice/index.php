@@ -6,7 +6,7 @@ $url = new \yii\helpers\Url();
 
 ?>
 <div class="container well">
-    <h1>Invoices</h1>
+    <h1>Invoices <a class="btn btn-primary" href="<?= $url->to('/invoice/create') ?>">Create invoice</a></h1>
     <br/>
     <? if ($invoices): ?>
 

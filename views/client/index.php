@@ -12,7 +12,7 @@ $url = new \yii\helpers\Url();
     }
 </style>
 <div class="container well">
-    <h1>Client list</h1>
+    <h1>Client list <a href="<?= $url->to('/client/create') ?>" class="btn btn-primary">Create client</a></h1>
 
     <br />
     <br />

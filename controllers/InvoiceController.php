@@ -80,6 +80,10 @@ class InvoiceController extends Controller
             $query = $client ? Invoice::find()->where(['client_id' => $client->id]) : Invoice::find();
         }
 
+        if (!Yii::$app->user->can("admin")) {
+            $query->andWhere(['user_id' => \Yii::$app->user->identity->id]);
+        }
+
         $pagination = new Pagination([
             'defaultPageSize' => 15,
             'totalCount' => $query->count(),
@@ -130,7 +134,7 @@ class InvoiceController extends Controller
         $id = Yii::$app->request->get('id');
         $invoiceModel = new Invoice();
 
-        $invoice = $invoiceModel->find($id)->one();
+        $invoice = $invoiceModel->find()->where(['id' => $id])->one();
 
         return $this->render('edit',
             [
